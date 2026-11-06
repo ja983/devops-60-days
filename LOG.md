@@ -10,3 +10,8 @@
 - Did: touch, mkdir -p, cp -a, mv (rename and move), rm -- on a dash-named file, quoting a filename with a space, ln and ln -s, shell wildcards with echo
 - Broke: rm -report.txt failing with an invalid option error
 - Learned: the shell expands * before the command runs, and a hard link shares an inode while a symlink is a separate file holding a path
+
+# Day 04 · Read what you did not write
+- Did: cat, head, tail, wc -l, sed -n on a 50,000-line log; tail -f on a live log; svclog --help and man svclog; man 5 svclog.conf; apropos
+- Learned: tail -f follows a live log; --help gives options but man gives behaviour; man section 5 documents config files while section 1 documents commands
+  
