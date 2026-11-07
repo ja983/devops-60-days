@@ -15,3 +15,7 @@
 - Did: cat, head, tail, wc -l, sed -n on a 50,000-line log; tail -f on a live log; svclog --help and man svclog; man 5 svclog.conf; apropos
 - Learned: tail -f follows a live log; --help gives options but man gives behaviour; man section 5 documents config files while section 1 documents commands
   
+# Day 05 · Edit without breaking
+- Did: backed up with cp -a, edited worker.conf in vi (changed a value, deleted a section), ran :%s/old/new/g across an allowlist, fixed YAML indentation with :set list, ran worker-check and checked $?, removed a stale .swp file
+- Broke: leaving off the g flag so lines were left unchanged, tabs in the YAML
+- Learned: always diff against the backup; :%s needs the g flag to replace every match on a line; YAML needs spaces, not tabs
