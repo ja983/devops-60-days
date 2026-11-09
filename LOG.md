@@ -19,3 +19,8 @@
 - Did: backed up with cp -a, edited worker.conf in vi (changed a value, deleted a section), ran :%s/old/new/g across an allowlist, fixed YAML indentation with :set list, ran worker-check and checked $?, removed a stale .swp file
 - Broke: leaving off the g flag so lines were left unchanged, tabs in the YAML
 - Learned: always diff against the backup; :%s needs the g flag to replace every match on a line; YAML needs spaces, not tabs
+
+# Day 06 · Users and permissions
+- Did: set umask 027 and checked file and directory modes with stat, chmod ug+x on a script, chown and chgrp, setgid on a shared directory, sticky bit on a drop box, traced a Permission denied to a parent directory, made umask permanent in /etc/profile.d
+- Broke: a umask that didn't apply because I set it in a different shell
+- Learned: deleting a file needs write on the directory, not the file; a directory needs x to be entered, on every parent in the path
