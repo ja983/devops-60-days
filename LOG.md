@@ -24,3 +24,8 @@
 - Did: set umask 027 and checked file and directory modes with stat, chmod ug+x on a script, chown and chgrp, setgid on a shared directory, sticky bit on a drop box, traced a Permission denied to a parent directory, made umask permanent in /etc/profile.d
 - Broke: a umask that didn't apply because I set it in a different shell
 - Learned: deleting a file needs write on the directory, not the file; a directory needs x to be entered, on every parent in the path
+
+# Day 07 · Processes
+- Did: ps -eo and ps -ef, pgrep -a, read /proc/<PID>/status and cmdline, nohup so a job outlived its shell, pkill, kill -9 on a process that ignored TERM, ss -lptn to find the owner of port 8080, renice
+- Broke: kill not stopping the process on 8080 because it was ignoring TERM
+- Learned: pkill exiting 0 only means the signal was delivered; a process can ignore SIGTERM, only SIGKILL can't be ignored
