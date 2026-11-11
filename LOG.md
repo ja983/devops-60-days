@@ -29,3 +29,7 @@
 - Did: ps -eo and ps -ef, pgrep -a, read /proc/<PID>/status and cmdline, nohup so a job outlived its shell, pkill, kill -9 on a process that ignored TERM, ss -lptn to find the owner of port 8080, renice
 - Broke: kill not stopping the process on 8080 because it was ignoring TERM
 - Learned: pkill exiting 0 only means the signal was delivered; a process can ignore SIGTERM, only SIGKILL can't be ignored
+
+# Day 08 · Logs are answers
+- Did: ls -lt /var/log, journalctl -u -b -p err, made the journal persistent with a drop-in, forced a logrotate, merged three logs with awk, sed and sort, tail -f, zgrep across rotated files
+- Learned: grep on the live log misses everything rotated out, so use zgrep on log*; the journal is in memory unless /var/log/journal exists
