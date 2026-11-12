@@ -33,3 +33,8 @@
 # Day 08 · Logs are answers
 - Did: ls -lt /var/log, journalctl -u -b -p err, made the journal persistent with a drop-in, forced a logrotate, merged three logs with awk, sed and sort, tail -f, zgrep across rotated files
 - Learned: grep on the live log misses everything rotated out, so use zgrep on log*; the journal is in memory unless /var/log/journal exists
+
+# Day 09 · Services with systemd
+- Did: moved stock-sync from a shell-started process to a systemd service: wrote /etc/systemd/system/stock-sync.service, ran daemon-reload and enable --now, checked the multi-user.target.wants symlink and PPID 1 instead of rebooting, then set User, Group and WorkingDirectory, and changed Restart to always
+- Broke: the first unit used User=stock-sync, but the real service account was stocksvc, so the service died with status=217/USER. After fixing that it failed with 200/CHDIR (couldn't enter /var/lib/stock-sync). I also hit "ps: list of process IDs must follow -p" because pgrep returned nothing and $PID was empty, and "systemctl show -p" failed because -p needs a property name.
+- Learned: exit status 217/USER means systemd can't resolve the User= name, so check the real account with id or getent passwd before guessing; 200/CHDIR means the working directory can't be entered; Restart=always revives the service after any exit but a deliberate systemctl stop still stops it; an empty $PID makes ps fail, so check what pgrep returned first
