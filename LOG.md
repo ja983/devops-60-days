@@ -38,3 +38,8 @@
 - Did: moved stock-sync from a shell-started process to a systemd service: wrote /etc/systemd/system/stock-sync.service, ran daemon-reload and enable --now, checked the multi-user.target.wants symlink and PPID 1 instead of rebooting, then set User, Group and WorkingDirectory, and changed Restart to always
 - Broke: the first unit used User=stock-sync, but the real service account was stocksvc, so the service died with status=217/USER. After fixing that it failed with 200/CHDIR (couldn't enter /var/lib/stock-sync). I also hit "ps: list of process IDs must follow -p" because pgrep returned nothing and $PID was empty, and "systemctl show -p" failed because -p needs a property name.
 - Learned: exit status 217/USER means systemd can't resolve the User= name, so check the real account with id or getent passwd before guessing; 200/CHDIR means the working directory can't be entered; Restart=always revives the service after any exit but a deliberate systemctl stop still stops it; an empty $PID makes ps fail, so check what pgrep returned first
+
+# Day 10 · Disk full at 3 AM
+- Did: lsblk and df -h, du -sh | sort -h to find the biggest directory, df -i to find out of inodes, find -delete on empty placeholder files, found a deleted-but-open file through /proc/<pid>/fd, restarted the holder to free the space, added a loop mount to /etc/fstab and checked it with mount --fake -a
+- Broke: touch failing with "No space left" while df -h said 4% used
+- Learned: a filesystem has two budgets, blocks and inodes, and df -h only shows one; deleted files keep their space until the last process closes them
