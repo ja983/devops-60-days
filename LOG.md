@@ -43,3 +43,8 @@
 - Did: lsblk and df -h, du -sh | sort -h to find the biggest directory, df -i to find out of inodes, find -delete on empty placeholder files, found a deleted-but-open file through /proc/<pid>/fd, restarted the holder to free the space, added a loop mount to /etc/fstab and checked it with mount --fake -a
 - Broke: touch failing with "No space left" while df -h said 4% used
 - Learned: a filesystem has two budgets, blocks and inodes, and df -h only shows one; deleted files keep their space until the last process closes them
+
+# Day 11 · Packages and SSH keys
+- Did: installed and removed tree with apt; generated an ed25519 key and logged in with it
+- Broke: set authorized_keys to 666 and SSH ignored my key
+- Learned: SSH refuses keys with lose permissions; ssh -v and journalctl show why
