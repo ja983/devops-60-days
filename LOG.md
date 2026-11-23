@@ -48,3 +48,8 @@
 - Did: installed and removed tree with apt; generated an ed25519 key and logged in with it
 - Broke: set authorized_keys to 666 and SSH ignored my key
 - Learned: SSH refuses keys with lose permissions; ssh -v and journalctl show why
+
+# Day 12 · Bash basics
+- Did: fixed beacon-count with set -euo pipefail so it fails loudly; added flags to beacon-report
+- Broke: beacon-count printed total=0 and exited 0 on a missing file, so cron would have recorded a clean run
+- Learned: a script must exit non-zero and print to stderr when it fails, or cron and pipelines can't tell it broke
