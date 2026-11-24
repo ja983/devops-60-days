@@ -53,3 +53,8 @@
 - Did: fixed beacon-count with set -euo pipefail so it fails loudly; added flags to beacon-report
 - Broke: beacon-count printed total=0 and exited 0 on a missing file, so cron would have recorded a clean run
 - Learned: a script must exit non-zero and print to stderr when it fails, or cron and pipelines can't tell it broke
+
+# Day 13 · Cron and hidden errors
+- Did: scheduled health.sh with cron (every 5 min), logging output and exit code to ~/health.log
+- Broke: a typo in the script path (helth.sh) failed every minute with no visible error; cron's journal only said "No MTA installed, discarding output"
+- Learned: cron discards output unless I redirect it with >> file 2>&1, and its log shows a job started, not whether it worked; logging $? gave exit=127 for "command not found"
